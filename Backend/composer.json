@@ -1,0 +1,14 @@
+{
+    "name": "shirongqi/joblist",
+    "description": "I want to now what's next job and do what, or to rember some ideas;",
+    "type": "project",
+    "authors": [
+        {
+            "name": "shirongqi",
+            "email": "shirongqi@126.com"
+        }
+    ],
+    "require": {
+        "paquettg/php-html-parser": "^1.7"
+    }
+}
