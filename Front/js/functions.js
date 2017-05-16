@@ -395,4 +395,35 @@ var urlRunInit = function(){
 }
 var getURLInfo = function(data){
 	console.log(data);
+	var data = data['data'];
+	var keyword = data['keywords'];
+	if(!data['keywords']){
+		if(data['keywords']){
+			keyword = data['keywords'];
+		}else if(data['discription']){
+			keyword = data['discription'];
+		}else if(data['contents']){
+			keyword = data['contents'];
+		}else{
+			keyword = "";	
+		}
+	}
+	$("#url-summary").val(keyword);
+	
+	var discription = data['discription'];
+	if(!data['discription']){
+		if(data['contents']){
+			discription = data['contents'];
+		}else{
+			discription = "";
+		}
+	}
+	$("#discription").val(discription);
+
+	var title = data['title']?data['title']:'';
+	$("#url-title").val(title);
+
+	if(data['icon']){
+		$("#url-icon").html('<img style="height: 100%; margin:0 auto;display:block;" src="'+data['icon']+'" />');
+	}
 }
