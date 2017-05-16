@@ -7,7 +7,8 @@ return [
 		'null'			=> 'EmptyAction',
 		'fast_rember'	=> 'FastRember',
 		'spider'		=> 'Spider',
-		'url_info'		=> 'URLInfo'
+		'url_info'		=> 'URLInfo',
+		'create'		=> 'Create'
 	],
 	'iconBaseInfo'		=> [
 		'storage'	=> dirname(__DIR__).'/Icons',

@@ -36,11 +36,17 @@ class Model{
 }
 class Controller extends Core{
 	public function run($method){
+		// 处理空行为
+		$className = get_class($this);
+		if($className == 'Controller\\'.Core::$C->get('RequestMap')['null']){
+			return $this->init($className);
+		}
 		$methodState = method_exists($this, $method);
 		if($methodState){
 			// 这里可以放一些前缀方法，后面可以放后缀方法;
 			$this->$method();
 		}else{
+			# 处理空方法
 			$this->emptyMethod($method);
 		}
 	}

@@ -6,18 +6,24 @@ class RequestMap{
 		$this->requestMap = $requestMap;
 	}
 
-	public function getAction($actionName='action',$method='POST'){
+	public function getAction($actionName='action',$method=''){
 		if(strtolower($method) === 'post'){
 			if(!isset($_POST[$actionName])){
 				$actionkey = 'null';
 			}else{
 				$actionkey = $_POST[$actionName];
 			}
-		}else{
+		}elseif(strtolower($method) === 'get'){
 			if(!isset($_GET[$actionName])){
 				$actionkey = 'null';
 			}else{
 				$actionkey = $_GET[$actionName];
+			}
+		}else{
+			if(!isset($_REQUEST[$actionName])){
+				$actionkey = 'null';
+			}else{
+				$actionkey = $_REQUEST[$actionName];
 			}
 		}
 		if(isset($this->requestMap[$actionkey])){
@@ -27,7 +33,7 @@ class RequestMap{
 		}
 		return $action;
 	}
-	public function getMethod($fun, $method){
+	public function getMethod($fun, $method = ''){
 		if(!is_string($fun) || $fun ==''){
 			$methodName = 'null';
 		}else{
@@ -37,11 +43,17 @@ class RequestMap{
 				}else{
 					$methodName = $_POST[$fun];
 				}
-			}else{
+			}elseif(strtolower($method) === 'get'){
 				if(!isset($_GET[$fun])){
 					$methodName = 'null';
 				}else{
 					$methodName = $_GET[$fun];
+				}
+			}else{
+				if(!isset($_REQUEST[$fun])){
+					$methodName = 'null';
+				}else{
+					$methodName = $_REQUEST[$fun];
 				}
 			}
 		}
