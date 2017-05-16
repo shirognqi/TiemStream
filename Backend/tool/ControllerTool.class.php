@@ -18,16 +18,4 @@ class ControllerTool extends Core{
 		//$this->controllerInit($controller);
 		return $controller;
 	}
-
-	
-
-
-
-//	private function controllerInit(&$controller){
-//		$controller->A = $this->A;
-//		$controller->B = $this->B;
-//		$controller->C = $this->C;
-//		$controller->L = $this->L;
-//		$controller->S = $this->S;
-//	}
 }

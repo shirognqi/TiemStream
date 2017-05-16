@@ -17,7 +17,11 @@
 </head>
 
 <body>
-	Sorry, The action has gone...
+	{if $actionState}
+	Sorry, The Action {$actionName} has gone...
+	{else}
+	no action defined;
+	{/if}
     <script src="Front/js/jquery.min.js"></script>
     <script src="Front/bootstrap/js/bootstrap.min.js"></script>
     <script src="Front/simpleStorage-master/simpleStorage.min.js"></script>
