@@ -7,6 +7,7 @@ $(document).ready(function(){
 	resetTime();
 	navInit();
 	initFastInsert();
+	urlRunInit();
 }); 
 
 

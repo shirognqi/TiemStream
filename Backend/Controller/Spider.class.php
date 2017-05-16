@@ -7,7 +7,10 @@ class Spider extends \Controller{
 		$curl = self::$L->getLib('CURL');
 		$curl->init();
 		$info = [];
-		$urlStr = self::$I->get('url');
+		$urlStr = trim(self::$I->post('url'));
+		if(!$urlStr){
+			return reply('',-1,'url is Empty');
+		}
 		$oriStr = $curl->get($urlStr);
 		// 获取HTML解析器；
 		$parseHTML = self::$L->getLib('ParseHTML');

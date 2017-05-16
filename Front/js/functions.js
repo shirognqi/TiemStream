@@ -371,3 +371,28 @@ var navInit = function(){
 	}
 }
 
+
+var urlRunInit = function(){
+	$("#url-run").bind('click', function(){
+			var url = $("#url").val();
+			if($.trim(url) == ''){
+				return ;
+			}
+			var _data = {
+				action	: 'spider',
+				method	: 'getURLInfo',
+				url		: url
+			};
+			$.ajax({
+				type	: "post",
+				url		: "jsonp.php",
+				dataType: "jsonp",
+				data	: _data,
+				jsonp	: "callback",
+				jsonpCallback:"getURLInfo"
+			});	
+	});
+}
+var getURLInfo = function(data){
+	console.log(data);
+}
