@@ -246,7 +246,8 @@
 					{include file='HTML_batch.tpl'}
 				</div>
 			</div>
-			<form action="backecd.php" method="post" target="createItemFrame">
+			<!--form action="backecd.php" method="post" target="createItemFrame"-->
+			<form action="jsonp.php?action=create&method=start" method="post">
 				<div class="form-group row">
 				 	<label for="job-prefix" class="col-sm-1 control-label">Job Prefix</label>
 					<div class="col-sm-5">
@@ -256,7 +257,7 @@
 					   		<span class="glyphicon glyphicon-arrow-left"></span> Clean
 					   	  </button>
 					   	</div>
-					   	<input type="text" class="form-control" id="job-prefix" autocomplete="off" placeholder="Input Job Prefix;">
+					   	<input type="text" class="form-control" id="job-prefix" name="job-prefix" autocomplete="off" placeholder="Input Job Prefix;">
 					   	<div class="input-group-btn">
 					   	  <button class="btn btn-default">
 							Revok <span class="glyphicon glyphicon-arrow-right"></span> 
@@ -301,7 +302,7 @@
 								<span class="glyphicon glyphicon-arrow-left"></span> Clean
 								</button>
 							</div>
-							<input type="text" class="form-control" id="job" autocomplete="off" placeholder="Input Job Name;">
+							<input type="text" class="form-control" id="job"  name="job" autocomplete="off" placeholder="Input Job Name;">
 							<div class="input-group-btn">
 								<button class="btn btn-default">
 									Revok <span class="glyphicon glyphicon-arrow-right"></span> 
@@ -346,7 +347,7 @@
 								<span class="glyphicon glyphicon-arrow-left"></span> Clean
 								</button>
 							</div>
-							<input type="url" class="form-control" id="url" autocomplete="off" placeholder="Input URL;">
+							<input type="url" class="form-control" id="url" name="url" autocomplete="off" placeholder="Input URL;">
 							<div class="input-group-btn">
 								<button class="btn btn-default">
 									Revok <span class="glyphicon glyphicon-arrow-right"></span> 
@@ -364,7 +365,7 @@
 				 <div class="form-group row">
 				 	<label for="url" class="col-sm-1 control-label">Fetch Info</label>
 					<div class="col-sm-1">
-						<button class="btn btn-default pull-right" type="button">
+						<button class="btn btn-default pull-right" type="button" id="url-run">
 							<span class="glyphicon glyphicon-fire"></span><b> Run</b>
 						</button>
 					</div>
@@ -373,7 +374,7 @@
 							<div class="input-group-addon">
 								Title
 							</div>
-							<input type="text" class="form-control" id="url-title" autocomplete="off">
+							<input type="text" class="form-control" id="url-title" name="url-title" autocomplete="off">
 						</div>
 					</div>
 					<div class="col-sm-5">
@@ -381,7 +382,7 @@
 							<div class="input-group-addon">
 								Summary
 							</div>
-							<input type="text" class="form-control" id="url-summary" autocomplete="off">
+							<input type="text" class="form-control" id="url-summary" name="url-summary" autocomplete="off">
 						</div>
 					</div>
 					<div class="col-sm-2">
@@ -389,18 +390,17 @@
 							<div class="input-group-addon">
 								Icon
 							</div>
-							<div class="form-control"></div>
-							<div class="input-group-addon"><input type="checkbox" id="url-icon-need"></div>
+							<div class="form-control" id="url-icon"></div>
+							<div class="input-group-addon"><input type="checkbox" id="url-icon-need" name="url-icon-need"></div>
 						</div>
 					</div>
-
 				 </div>
 				<div class="form-group row">
 					<label for="start-time" class="col-sm-1 control-label">Time info</label>
 					<div class="col-sm-4">
 						<div class="input-group">
 							<div class="input-group-addon">Start</div>
-							<input type="datetime-local" class="form-control" autocomplete="off" id="start-time">
+							<input type="datetime-local" class="form-control" autocomplete="off" id="start-time" name="start-time">
 							<div class="input-group-btn">
 							   <button id="time-refresh" class="btn btn-default" type="button"> Refresh</button>
 							</div>
@@ -409,7 +409,7 @@
 					<div class="col-sm-4">
 						<div class="input-group">
 							<div class="input-group-addon">End</div>
-							<input type="datetime-local" class="form-control" autocomplete="off" id="end-time">
+							<input type="datetime-local" class="form-control" autocomplete="off" id="end-time" name="end-time">
 							<div class="input-group-btn">
 							   <button id="time-tomorrow" class="btn btn-default" type="button"> Tomorrow</button>
 							</div>
@@ -418,16 +418,16 @@
 					<div class="col-sm-3">
 						<div class="input-group">
 							<div class="input-group-addon">Crontab</div>
-							<input type="text" class="form-control" id="crontab" autocomplete="off" placeholder="* * * * *">
+							<input type="text" class="form-control" id="crontab" autocomplete="off" placeholder="* * * * *" name="crontab">
 							<div class="input-group-addon">New</div>
-							<div class="input-group-addon"><input type="checkbox" id="crontab-new"></div>
+							<div class="input-group-addon"><input type="checkbox" id="crontab-new" name="crontab-new"></div>
 						</div>
 					</div>
 				</div>
 				<div class="form-group row">
 				   <label for="discription" class="col-sm-1 control-label">Discription</label>
 				   <div class="col-sm-11">
-				   	<textarea id="discription" class="form-control" rows="3" placeholder="Short & Power..."></textarea>
+				   	<textarea id="discription" name="discription" class="form-control" rows="3" placeholder="Short & Power..."></textarea>
 				   </div>
 				</div>
 				<div class="form-group row">
@@ -435,7 +435,7 @@
 					<div class="col-sm-2">
 						<div class="input-group">
 							<div class="input-group-addon">Nice</div>
-							<input type="number" class="form-control" id="nice" autocomplete="off" placeholder="0" value="0">
+							<input type="number" class="form-control" id="nice" name="nice" autocomplete="off" placeholder="0" value="0">
 						</div>
 					</div>
 					<div class="col-sm-9">
